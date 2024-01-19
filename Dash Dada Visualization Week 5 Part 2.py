@@ -34,7 +34,7 @@ year_list = [i for i in range(1980, 2024, 1)]
 app.layout = html.Div([
     #TASK 2.1 Add title to the dashboard
     html.H1("Automobile Sales Statistics Dashboard", 
-        style={'textAlign': 'center', 
+    style={'textAlign': 'center', 
             'color': '#503D36', 
             'font-size': 24}),#May include style for title
     html.Div([#TASK 2.2: Add two dropdown menus
@@ -47,7 +47,6 @@ app.layout = html.Div([
             id='Select-year',
             options=[{'label': i, 'value': i} for i in year_list],
             value='Select-year')),
-
     html.Div([#TASK 2.3: Add a division for output display
     html.Div(id='output-container', className='chart-grid', style={'display': 'flex'})
 #TASK 2.4: Creating Callbacks
@@ -73,7 +72,7 @@ def update_output_container(selected_statistics, input_year):
     if selected_statistics == 'Recession Period Statistics':
         # Filter the data for recession periods
         recession_data = data[data['Recession'] == 1]
-        
+
 #TASK 2.5: Create and display graphs for Recession Report Statistics
 
 #Plot 1 Automobile sales fluctuate over Recession Period (year wise)
@@ -113,6 +112,7 @@ def update_output_container(selected_statistics, input_year):
                 color='Vehicle_Type',
                 labels={'unemployment_rate': 'Unemployment Rate', 'Automobile_Sales': 'Average Automobile Sales'},
                 title="Effect of Unemployment Rate on Sales of various Vehicle Types"))
+
         return [
             html.Div(className='chart-item', children=[html.Div(children=R_chart1),html.Div(children=R_chart2)],style={'display':'flex'}),
             html.Div(className='chart-item', children=[html.Div(children=R_chart3),html.Div(R_chart4)],style={'display':'flex'})
@@ -147,7 +147,7 @@ def update_output_container(selected_statistics, input_year):
                x='Vehicle_Type',
                y='Automobile_Sales',
                title='Average Vehicles Sold by Vehicle Type in the year {}'.format(input_year)))
-           
+
             # Total Advertisement Expenditure for each vehicle using pie chart
         advert_exp=yearly_data.groupby('Vehicle_Type')['Advertising_Expenditure'].sum().reset_index()
         Y_chart4=dcc.Graph(
@@ -155,6 +155,7 @@ def update_output_container(selected_statistics, input_year):
                values='Advertising_Expenditure',
                names='Vehicle_Type',
                title="Total Advertising Expenditure"))
+
 #TASK 2.6: Returning the graphs for displaying Yearly data
         return [
                 html.Div(className='chart-item', children=[html.Div(Y_chart1),html.Div(Y_chart2)],style={'display':'flex'}),
